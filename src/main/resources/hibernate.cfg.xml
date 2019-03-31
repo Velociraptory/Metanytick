@@ -1,0 +1,26 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+
+        <property name="connection.url">jdbc:postgresql://127.0.0.1:5432/metanytick</property> <!-- BD Mane -->
+        <property name="connection.driver_class">org.postgresql.Driver</property> <!-- DB Driver -->
+        <property name="connection.username">George</property> <!-- DB User -->
+        <property name="connection.password">schrodingerscat</property> <!-- DB Password -->
+
+        <property name="dialect">org.hibernate.dialect.PostgreSQL9Dialect</property> <!-- DB Dialect -->
+        <property name="hbm2ddl.auto">update</property> <!-- create / create-drop / update -->
+
+        <property name="show_sql">true</property> <!-- Show SQL in console -->
+
+
+        <mapping class="entity.Catalog"/>
+        <mapping class="entity.RegisteredUser"/>
+        <mapping class="entity.Administrator"/>
+        <mapping class="entity.Review"/>
+        <mapping class="entity.CriticReview"/>
+        <mapping class="entity.UserReview"/>
+        <mapping class="entity.MediaProduct"/>
+    </session-factory>
+</hibernate-configuration>
