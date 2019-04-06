@@ -1,14 +1,9 @@
 package entity;
 
-public class UserReviewId {
-    private static int id;
+public class UserReviewId extends GeneralId{
     private static UserReviewId instance;
 
     private UserReviewId() {
-    }
-
-    public static int getId() {
-        return id;
     }
 
     public static UserReviewId getInstance(){
@@ -16,8 +11,5 @@ public class UserReviewId {
             instance = new UserReviewId();
         }
         return instance;
-    }
-    public static void setNewId() { //обновление id на следующее использование
-        UserReviewId.id = ++id;
     }
 }

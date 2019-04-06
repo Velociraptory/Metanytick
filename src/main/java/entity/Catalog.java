@@ -71,6 +71,7 @@ public class Catalog implements Requesting { //каталог для хране�
         return result;
     }
 
+    @Override
     public MediaProductRequestResult requestAll() { //запрос всех медиапродуктов из каталога
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса

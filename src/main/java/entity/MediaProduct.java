@@ -113,10 +113,10 @@ public class MediaProduct implements Reviewing {
 
     @Override
     public void createCriticReview(String criticReviewText, RegisteredUser author, double metascore, String fullPublication) { //реализации метода создания рецензии критика
-        int criticReviewId = CriticReviewId.getId(); //получение id для новой рецензии критика
+        int criticReviewId = CriticReviewId.getInstance().getId(); //получение id для новой рецензии критика
         CriticReview criticReview = new CriticReview(criticReviewId, criticReviewText, author, metascore, fullPublication); //инициализация объекта рецензии
         criticReviews.put(criticReviewId, criticReview); //запись рецензии в каталог рецензий на данный медиапродукт
-        CriticReviewId.setNewId(); //обновление id на следующее использование
+        CriticReviewId.getInstance().setNewId(); //обновление id на следующее использование
         updateMetascore(metascore); //обновление текущего metascore
         ///DATABASE///
         DatabaseFacade databaseFacade = new PostgresDatabaseFacade();
@@ -165,13 +165,13 @@ public class MediaProduct implements Reviewing {
 
     @Override
     public void createUserReview(String userReviewText, RegisteredUser author, double userscore) { //реализации метода создания рецензии обычного пользователя
-        int userReviewId = UserReviewId.getId(); //получение id для новой рецензии обычного пользователя
+        int userReviewId = UserReviewId.getInstance().getId(); //получение id для новой рецензии обычного пользователя
         int helpful [] = new int [2]; //структура данных для хранение коэффициента полезности рецензии
         //helpful [0] = 0; //кол-во оценок "полезна"
         //helpful [1] = 0; //кол-во оценок "не полезна"
         UserReview userReview = new UserReview(userReviewId, userReviewText, author, userscore, helpful); //инициализация объекта рецензии
         userReviews.put(userReviewId, userReview); //запись рецензии в каталог рецензий на данный медиапродукт
-        UserReviewId.setNewId(); //обновление id на следующее использование
+        UserReviewId.getInstance().setNewId(); //обновление id на следующее использование
         updateUserscore(userscore); //обновление текущего userscore
         ///DATABASE///
         DatabaseFacade databaseFacade = new PostgresDatabaseFacade();

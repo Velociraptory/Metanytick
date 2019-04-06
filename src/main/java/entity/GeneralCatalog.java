@@ -37,6 +37,8 @@ public class GeneralCatalog implements Requesting {
         //logger.info("CAN'T FIND CATALOG"); //сообщение о невозможности найти указанный каталог
         return null;
     }
+
+    @Override
     public MediaProductRequestResult requestAll() { //метод запроса всех медиапродуктов из всех каталогов
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -57,6 +59,7 @@ public class GeneralCatalog implements Requesting {
                 '}';
     }
 
+    @Override
     public MediaProductRequestResult requestById(int id) { //запрос медиапродуктов по id
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -70,6 +73,7 @@ public class GeneralCatalog implements Requesting {
         return mediaProductRequestResult; //возвращаем результат запроса
     }
 
+    @Override
     public MediaProductRequestResult requestByTitle(String title) { //запрос медиародуктов по названию
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -83,6 +87,7 @@ public class GeneralCatalog implements Requesting {
         return mediaProductRequestResult; //возвращаем результат запроса
     }
 
+    @Override
     public MediaProductRequestResult requestByRelease(int release) { //запрос медиапродуктов по дате выпуска
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -96,6 +101,7 @@ public class GeneralCatalog implements Requesting {
         return mediaProductRequestResult; //возвращаем результат запроса
     }
 
+    @Override
     public MediaProductRequestResult requestByMetascore(double metascore) { //запрос медиапродуктов по metascore
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -109,6 +115,7 @@ public class GeneralCatalog implements Requesting {
         return mediaProductRequestResult; //возвращаем результат запроса
     }
 
+    @Override
     public MediaProductRequestResult requestByUserscore(double userscore) { //запрос медиапродуктов по userscore
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -122,6 +129,7 @@ public class GeneralCatalog implements Requesting {
         return mediaProductRequestResult; //возвращаем результат запроса
     }
 
+    @Override
     public MediaProductRequestResult requestByCreator(String creator) { //запрос медиапродуктов по создателю
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса
@@ -135,6 +143,7 @@ public class GeneralCatalog implements Requesting {
         return mediaProductRequestResult; //возвращаем результат запроса
     }
 
+    @Override
     public MediaProductRequestResult requestByRating(String rating) { //запрос медиапродуктов по возрастному рейтингу
         ArrayList<MediaProduct> result = new ArrayList<MediaProduct>(); //лист для хранения результата запроса
         MediaProductRequestResult mediaProductRequestResult = new MediaProductRequestResult(result); //создаем объект результата запроса

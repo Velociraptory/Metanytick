@@ -33,10 +33,10 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
 
     @Override
     public void addMediaProduct(Catalog catalog, String title, int release, String creator, String rating, String runtime) { //реализация метода добавления медиапродукта в каталог
-        int id = MediaProductId.getId(); //получение id для нового медиапродукта
+        int id = MediaProductId.getInstance().getId(); //получение id для нового медиапродукта
         MediaProduct newMediaProduct = new MediaProduct(id, title, release, creator, rating, runtime, catalog); //создаем новый медиапродукт
         catalog.getMediaProducts().put(id, newMediaProduct); //помещаем его в каталог
-        MediaProductId.setNewId(); //обновление id на следующее использование
+        MediaProductId.getInstance().setNewId(); //обновление id на следующее использование
         ///DATABASE///
         DatabaseFacade databaseFacade = new PostgresDatabaseFacade();
         //обновление БД от имени администратора вызвавшего метод
@@ -87,7 +87,7 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
         ArrayList<String> lines = FileReader.readFromFile(fileName); //записываем реузльтат метода чтения строк из файла в список
         for (String objectFields : lines) { //идем по каждой строке файла
             //данные, которые мы берем не из файла
-            int id = MediaProductId.getId(); //получение id для нового медиапродукта
+            int id = MediaProductId.getInstance().getId(); //получение id для нового медиапродукта
 
             //данные, которые мы берем из файла
             String[] splitted = objectFields.split(", ");
@@ -98,7 +98,7 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
             String runtimeFromFile = splitted[4];
             MediaProduct newMediaProduct = new MediaProduct(id, titleFromFile, releaseFromFile, creatorFromFile, ratingFromFile, runtimeFromFile, catalog); //создаем медиапродукт на основе прочитанных данных
             catalog.getMediaProducts().put(id, newMediaProduct); //помещаем его в каталог
-            MediaProductId.setNewId(); //обновление id на следующее использование
+            MediaProductId.getInstance().setNewId(); //обновление id на следующее использование
 
             ///DATABASE///
             DatabaseFacade databaseFacade = new PostgresDatabaseFacade();
@@ -143,12 +143,22 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
             mediaProductDao.save(newMediaProduct); //запись медиапродукта в БД с помощью hibernate
         }
     }
+
+    public void writeMediaProductsToFile(HashMap<Integer, MediaProduct> mediaProducts, String fileName){ //метод записи медиародуктов в файл
+        //String line;
+        ArrayList<String> lines = new ArrayList<String>(); //список для хранения медиапродуктов в текстовой форме
+        for(MediaProduct mediaProduct : mediaProducts.values()){ //проходимся по отображению медиародуктов
+            lines.add(mediaProduct.toString()); //записываем каждый медиапродукт в текстовой форме
+        }
+        FileWriter.writeToFile(lines, fileName); //записываем строки в файл
+    }
+
     @Override
     public void addCriticReviewsFromFile(String fileName) { //реализация метода добавления рецензий критиков используя данные из файла
         ArrayList<String> lines = FileReader.readFromFile(fileName); //записываем реузльтат метода чтения строк из файла в список
         for (String objectFields : lines) { //идем по каждой строке файла
             //данные, которые мы берем не из файла
-            int id = CriticReviewId.getId(); //получение id для новой рецензии критика
+            int id = CriticReviewId.getInstance().getId(); //получение id для новой рецензии критика
 
             //данные, которые мы берем из файла
             String[] splitted = objectFields.split(", ");
@@ -160,7 +170,7 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
             CriticReview criticReview = new CriticReview(id, reviewText, UserCatalog.getInstance().requestByName(author).getResult().get(0), metascore, fullPublication); //создаем рецензию критика на основе прочитанных данных
             MediaProduct mediaProduct = GeneralCatalog.getInstance().requestByTitle(mediaProductFromFile).getResult().get(0); //получение медиапродукта по имени из файла
             mediaProduct.getCriticReviews().put(id, criticReview); //помещаем рецензию критика в каталог рецензий соответствующего медиапродукта
-            CriticReviewId.setNewId(); //обновление id на следующее использование
+            CriticReviewId.getInstance().setNewId(); //обновление id на следующее использование
             mediaProduct.updateMetascore(metascore); //обновление metascore последобавления новой рецензии
             ///DATABASE///
             DatabaseFacade databaseFacade = new PostgresDatabaseFacade();
@@ -213,7 +223,7 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
         ArrayList<String> lines = FileReader.readFromFile(fileName); //записываем реузльтат метода чтения строк из файла в список
         for (String objectFields : lines) { //идем по каждой строке файла
             //данные, которые мы берем не из файла
-            int id = UserReviewId.getId(); //получение id для новой рецензии критика
+            int id = UserReviewId.getInstance().getId(); //получение id для новой рецензии критика
 
             //данные, которые мы берем из файла
             String[] splitted = objectFields.split(", ");
@@ -225,7 +235,7 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
             UserReview userReview = new UserReview(id, reviewText, UserCatalog.getInstance().requestByName(author).getResult().get(0), userscore, helpful); //создаем рецензию обычного пользователя на основе прочитанных данных
             MediaProduct mediaProduct = GeneralCatalog.getInstance().requestByTitle(mediaProductFromFile).getResult().get(0); //получение медиапродукта по имени из файла
             mediaProduct.getUserReviews().put(id, userReview); //помещаем рецензию обычного пользователя в каталог рецензий соответствующего медиапродукта
-            UserReviewId.setNewId(); //обновление id на следующее использование
+            UserReviewId.getInstance().setNewId(); //обновление id на следующее использование
             mediaProduct.updateUserscore(userscore); //обновление userscore последобавления новой рецензии
 
             ///DATABASE///
@@ -283,10 +293,10 @@ public class Administrator extends RegisteredUser implements CatalogManager, Use
     @Override
     public void addCatalog(String catalogName) { //реализация метода добавления каталога
         HashMap<Integer, MediaProduct> newCatalogMap = new HashMap<Integer, MediaProduct>(); //структура данных для хранения медиапродуктов
-        int catalogId = CatalogId.getId(); //получение id для нового каталога
+        int catalogId = CatalogId.getInstance().getId(); //получение id для нового каталога
         Catalog newCatalog = new Catalog(catalogId, catalogName, newCatalogMap); //создание тестового каталога для хранения медиапродуктов
         GeneralCatalog.getInstance().getCatalogs().put(catalogId, newCatalog); //записываем новый каталог в главный каталог
-        CatalogId.setNewId(); //обновление id на следующее использование
+        CatalogId.getInstance().setNewId(); //обновление id на следующее использование
         ///DATABASE///
         DatabaseFacade databaseFacade = new PostgresDatabaseFacade();
         //обновление БД от имени администратора вызвавшего метод

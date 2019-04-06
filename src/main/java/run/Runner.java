@@ -111,6 +111,8 @@ public class Runner {
         //System.out.println(GeneralCatalog.getInstance().requestCatalog("WES ANDERSON'S FILMOGRAPHY")); //каталог после удаление медиапродукта
 
 
+        //admin.writeMediaProductsToFile(GeneralCatalog.getInstance().requestCatalog("80'S CINEMA").getMediaProducts(), "c://80'S CINEMA.txt"); //запись медиапродуктов в файл
+
         //superAdmin.dropDBAssignment(admin); //сложение суперадминистратором с младшего администратора полномочий на БД
         //metauser.dropSuperRoleAssignment(superAdmin); //сложение метапользователем полномочий с суперадминистратора на БД
     }

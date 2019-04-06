@@ -1,7 +1,5 @@
 package entity;
 
-import com.sun.javafx.beans.IDProperty;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +12,8 @@ public class RegisteredUserBeansConfiguration { //здесь лежат бины
     @Description("Super Jamal Bean")
     @Qualifier("Super Jamal")
     Administrator SuperJamal(){
-        int id = UserId.getId(); //получение id для нового пользователя
-        UserId.setNewId(); //обновление id на следующее использование
+        int id = UserId.getInstance().getId(); //получение id для нового пользователя
+        UserId.getInstance().setNewId(); //обновление id на следующее использование
         return new Administrator(id, "SuperJamal", "superjamal.gmail.com", "jamal69", false, "doesn't have");
 
     }
@@ -24,8 +22,8 @@ public class RegisteredUserBeansConfiguration { //здесь лежат бины
     @Description("Jamal Bean")
     @Qualifier("Jamal")
     Administrator Jamal(){
-        int id = UserId.getId(); //получение id для нового пользователя
-        UserId.setNewId(); //обновление id на следующее использование
+        int id = UserId.getInstance().getId(); //получение id для нового пользователя
+        UserId.getInstance().setNewId(); //обновление id на следующее использование
         return new Administrator(id, "Jamal", "jamal69.gmail.com", "jamal69", false, "doesn't have");
 
     }
@@ -34,8 +32,8 @@ public class RegisteredUserBeansConfiguration { //здесь лежат бины
     @Description("Roger Ebert Bean")
     @Qualifier("RogerEbert")
     RegisteredUser RogerEbert(){
-        int id = UserId.getId(); //получение id для нового пользователя
-        UserId.setNewId(); //обновление id на следующее использование
+        int id = UserId.getInstance().getId(); //получение id для нового пользователя
+        UserId.getInstance().setNewId(); //обновление id на следующее использование
         return new RegisteredUser(id, "Roger Ebert", "roger.ebert.gmail.com", "****", true, "rogerebert.com");
     }
 
@@ -43,8 +41,8 @@ public class RegisteredUserBeansConfiguration { //здесь лежат бины
     @Description("Gene Siskel Bean")
     @Qualifier("GeneSiskel")
     RegisteredUser GeneSiskel(){
-        int id = UserId.getId(); //получение id для нового пользователя
-        UserId.setNewId(); //обновление id на следующее использование
+        int id = UserId.getInstance().getId(); //получение id для нового пользователя
+        UserId.getInstance().setNewId(); //обновление id на следующее использование
         return new RegisteredUser(id, "Gene Siskel", "gene.siskel.gmail.com", "****", true, "genesiskel.com");
     }
 
@@ -52,8 +50,8 @@ public class RegisteredUserBeansConfiguration { //здесь лежат бины
     @Description("John Doe Bean")
     @Qualifier("JohnDoe")
     RegisteredUser JohnDoe(){
-        int id = UserId.getId(); //получение id для нового пользователя
-        UserId.setNewId(); //обновление id на следующее использование
+        int id = UserId.getInstance().getId(); //получение id для нового пользователя
+        UserId.getInstance().setNewId(); //обновление id на следующее использование
         return new RegisteredUser(id, "John Doe", "john.doe.mail.ru", "****", false, "doesn't have");
     }
 }

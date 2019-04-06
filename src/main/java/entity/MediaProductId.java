@@ -1,14 +1,9 @@
 package entity;
 
-public class MediaProductId {
-    private static int id;
+public class MediaProductId extends GeneralId{
     private static MediaProductId instance;
 
     private MediaProductId() {
-    }
-
-    public static int getId() {
-        return id;
     }
 
     public static MediaProductId getInstance(){
@@ -16,9 +11,5 @@ public class MediaProductId {
             instance = new MediaProductId();
         }
         return instance;
-    }
-
-    public static void setNewId() { //обновление id на следующее использование
-        MediaProductId.id = ++id;
     }
 }

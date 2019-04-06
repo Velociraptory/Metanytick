@@ -1,14 +1,9 @@
 package entity;
 
-public class UserId {
-    private static int id;
+public class UserId extends GeneralId{
     private static UserId instance;
 
     private UserId() {
-    }
-
-    public static int getId() {
-        return id;
     }
 
     public static UserId getInstance() {
@@ -18,7 +13,4 @@ public class UserId {
         return instance;
     }
 
-    public static void setNewId() { //обновление id на следующее использование
-        UserId.id = ++id;
-    }
 }

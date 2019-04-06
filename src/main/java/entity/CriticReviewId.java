@@ -1,14 +1,9 @@
 package entity;
 
-public class CriticReviewId {
-    private static int id;
+public class CriticReviewId extends GeneralId{
     private static CriticReviewId instance;
 
     private CriticReviewId() {
-    }
-
-    public static int getId() {
-        return id;
     }
 
     public static CriticReviewId getInstance(){
@@ -16,9 +11,5 @@ public class CriticReviewId {
             instance = new CriticReviewId();
         }
         return instance;
-    }
-
-    public static void setNewId() { //обновление id на следующее использование
-        CriticReviewId.id = ++id;
     }
 }
